@@ -10,8 +10,14 @@ function NeuralBackground() {
     let width = window.innerWidth;
     let height = window.innerHeight;
 
-    canvas.width = width;
-    canvas.height = height;
+    const dpr = window.devicePixelRatio || 1;
+
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+
+    ctx.scale(dpr, dpr);
 
     const nodes = [];
     const NODE_COUNT = 70;
@@ -26,10 +32,11 @@ function NeuralBackground() {
       });
     }
 
+    let animationId;
+
     function animate() {
       ctx.clearRect(0, 0, width, height);
 
-      // draw nodes
       nodes.forEach((node) => {
         node.x += node.vx;
         node.y += node.vy;
@@ -43,7 +50,6 @@ function NeuralBackground() {
         ctx.fill();
       });
 
-      // draw connections
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const dx = nodes[i].x - nodes[j].x;
@@ -61,7 +67,7 @@ function NeuralBackground() {
         }
       }
 
-      requestAnimationFrame(animate);
+      animationId = requestAnimationFrame(animate);
     }
 
     animate();
@@ -69,21 +75,27 @@ function NeuralBackground() {
     const handleResize = () => {
       width = window.innerWidth;
       height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
+
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
+
+      ctx.scale(dpr, dpr);
     };
 
     window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(animationId);
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full z-0"
+      className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none"
     />
   );
 }

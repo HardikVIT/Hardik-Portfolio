@@ -1,25 +1,35 @@
 import Navbar from "./components/Navbar";
+import NeuralBackground from "./components/NeuralBackground";
+
 import Home from "./sections/Home";
 import Projects from "./sections/Projects";
 import Certifications from "./sections/Certifications";
-import Other from "./sections/Other";
 
 function App() {
-  return (
-    <div className="bg-black text-white overflow-x-hidden">
 
+  return (
+
+    <div className="relative w-full min-h-screen overflow-x-hidden">
+
+      {/* Neural Network Background */}
+      <NeuralBackground />
+
+      {/* Navbar */}
       <Navbar />
 
-      <Home />
+      {/* Main Content */}
+      <main className="relative z-10">
 
-      <Projects />
+        <Home />
+        <Projects />
+        <Certifications />
 
-      <Certifications />
-
-      <Other />
+      </main>
 
     </div>
+
   );
+
 }
 
 export default App;

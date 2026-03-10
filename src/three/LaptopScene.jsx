@@ -45,7 +45,7 @@ function CameraMove() {
         scrollTrigger:{
           trigger:"#home",
           start:"top top",
-          end:"+=2000",
+          end:"+=2500",
           scrub:true,
           pin:true
         }
