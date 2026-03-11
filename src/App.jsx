@@ -4,6 +4,7 @@ import NeuralBackground from "./components/NeuralBackground";
 import Home from "./sections/Home";
 import Projects from "./sections/Projects";
 import Certifications from "./sections/Certifications";
+import Other from "./sections/Other";
 
 function App() {
 
@@ -14,15 +15,23 @@ function App() {
       {/* Neural Network Background */}
       <NeuralBackground />
 
-      {/* Navbar */}
-      <Navbar />
+      {/* Navbar always above content */}
+      <div className="relative z-50">
+        <Navbar />
+      </div>
 
-      {/* Main Content */}
+      {/* Main content */}
       <main className="relative z-10">
 
+        {/* Hero section with laptop zoom */}
         <Home />
+
+        {/* Full page projects (appears after zoom transition) */}
         <Projects />
+
+        {/* Other sections */}
         <Certifications />
+        <Other />
 
       </main>
 

@@ -9,7 +9,7 @@ function Home() {
     <Element
       name="home"
       id="home"
-      className="relative w-full min-h-[300vh]"
+      className="relative w-full "
     >
 
       {/* STICKY VIEWPORT */}

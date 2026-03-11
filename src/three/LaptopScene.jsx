@@ -1,9 +1,10 @@
 import { Canvas, useThree } from "@react-three/fiber";
-import { useGLTF } from "@react-three/drei";
-import { useEffect } from "react";
+import { useGLTF, Html } from "@react-three/drei";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-
+import Projects from "../sections/Projects";
+import ProjectLoading from "../components/ProjectLoading";
 gsap.registerPlugin(ScrollTrigger);
 
 /* ===============================
@@ -14,15 +15,61 @@ function LaptopModel() {
 
   const { scene } = useGLTF("/models/laptop.glb");
 
+  const screenMeshes = [];
+
+  scene.traverse((child) => {
+    if (child.name === "Node-Mesh_1") {
+      screenMeshes.push(child);
+    }
+  });
+
   return (
-    <primitive
-      object={scene}
+    <group
       scale={2}
       rotation={[0, Math.PI, 0]}
-      position={[0, +0.2, 0]}
-    />
-  );
+      position={[0, 0.2, 0]}
+    >
 
+      <primitive object={scene} />
+
+      {screenMeshes.map((mesh, i) => (
+        <mesh
+          key={i}
+          geometry={mesh.geometry}
+          position={mesh.position}
+          rotation={mesh.rotation}
+          scale={mesh.scale}
+        >
+          <meshBasicMaterial transparent opacity={0} />
+
+          <Html
+            transform
+            occlude
+            scale={0.0200}
+            position={[-0.020, 0.045, -0.01]}
+            rotation={[0, Math.PI, 0]}
+          >
+            <div
+              style={{
+                width: "910px",
+                height: "780px",
+                background: "black",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "white",
+                fontSize: "40px"
+              }}
+            >
+              <ProjectLoading />
+            </div>
+          </Html>
+
+        </mesh>
+      ))}
+
+    </group>
+  );
 }
 
 /* ===============================
@@ -37,9 +84,9 @@ function CameraMove() {
 
     gsap.fromTo(
       camera.position,
-      { x:0, y:0.6, z:6 },
+      { x:0, y:0.6, z:6 },  
       {
-        x:0,
+        x:0.18,
         y:0.6,
         z:0.3,
         scrollTrigger:{
@@ -48,8 +95,12 @@ function CameraMove() {
           end:"+=2500",
           scrub:true,
           pin:true
+        },
+        onUpdate: () => {
+          camera.lookAt(0.03, 0.45, 0); // aim camera at screen
         }
       }
+      
     );
 
   }, [camera]);
