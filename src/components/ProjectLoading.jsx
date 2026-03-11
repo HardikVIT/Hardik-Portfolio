@@ -1,21 +1,19 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 
 function ProjectLoading() {
-  const rocketRef = useRef();
+
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
 
     const handleScroll = () => {
 
-      const scrollY = window.scrollY;
-      const maxScroll = 2500; // same value used in CameraMove
+      const scrollTop = window.scrollY;
+      const maxScroll = 800;
 
-      const progress = Math.min(scrollY / maxScroll, 1);
+      const percentage = Math.min((scrollTop / maxScroll) * 100, 100);
 
-      if (rocketRef.current) {
-        rocketRef.current.style.transform =
-          `translateY(${-400 * progress}px)`;
-      }
+      setProgress(percentage);
 
     };
 
@@ -26,29 +24,30 @@ function ProjectLoading() {
   }, []);
 
   return (
-    <div className="w-full h-full bg-black flex flex-col items-center justify-center relative overflow-hidden">
+    <section className="fixed inset-0 z-40 flex items-center justify-center bg-black">
 
-      {/* Rocket */}
-      <div ref={rocketRef} className="transition-transform">
+      <div className="text-center">
 
-        <svg width="80" height="160" viewBox="0 0 100 200">
-          <rect x="40" y="60" width="20" height="80" fill="#3b82f6"/>
-          <polygon points="50,20 35,60 65,60" fill="#60a5fa"/>
-          <polygon points="40,140 20,160 40,160" fill="#3b82f6"/>
-          <polygon points="60,140 80,160 60,160" fill="#3b82f6"/>
-          <circle cx="50" cy="90" r="6" fill="#0ea5e9"/>
-        </svg>
+        <h2 className="text-neutral-300 text-2xl mb-12 tracking-wide">
+          Loading Projects
+        </h2>
+
+        <div className="w-[420px] h-[6px] bg-neutral-800 rounded-full overflow-hidden">
+
+          <div
+            className="h-full bg-blue-400 transition-all duration-200"
+            style={{ width: `${progress}%` }}
+          />
+
+        </div>
+
+        <p className="text-neutral-400 mt-6 text-sm">
+          {Math.floor(progress)}%
+        </p>
 
       </div>
 
-      {/* smoke */}
-      <div className="absolute bottom-8 flex gap-2">
-        <div className="w-6 h-6 bg-gray-400 rounded-full opacity-40 animate-bounce"></div>
-        <div className="w-5 h-5 bg-gray-500 rounded-full opacity-40 animate-bounce delay-200"></div>
-        <div className="w-4 h-4 bg-gray-600 rounded-full opacity-40 animate-bounce delay-300"></div>
-      </div>
-
-    </div>
+    </section>
   );
 }
 

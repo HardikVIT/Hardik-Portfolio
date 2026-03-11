@@ -20,12 +20,13 @@ function LaptopModel() {
   scene.traverse((child) => {
     if (child.name === "Node-Mesh_1") {
       screenMeshes.push(child);
+      child.material.color.set("black");
     }
   });
 
   return (
     <group
-      scale={2}
+      scale={1.85}
       rotation={[0, Math.PI, 0]}
       position={[0, 0.2, 0]}
     >
@@ -46,13 +47,13 @@ function LaptopModel() {
             transform
             occlude
             scale={0.0200}
-            position={[-0.020, 0.045, -0.01]}
+            position={[-0.0199, 0.045, -0.01]}
             rotation={[0, Math.PI, 0]}
           >
             <div
               style={{
-                width: "910px",
-                height: "780px",
+                width: "500px",
+                height: "600px",
                 background: "black",
                 display: "flex",
                 alignItems: "center",

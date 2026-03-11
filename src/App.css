@@ -6,7 +6,13 @@
   padding: 2rem;
   text-align: center;
 }
-
+.fade-top-mask {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0px,
+    black 120px
+  );
+}
 .logo {
   height: 6em;
   padding: 1.5em;

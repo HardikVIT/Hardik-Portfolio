@@ -18,7 +18,7 @@ function Home() {
         {/* LEFT TEXT */}
         <div className="absolute left-20 top-[35%] max-w-lg z-20">
 
-          <h1 className="text-6xl font-bold text-blue-400 drop-shadow-[0_0_15px_#3b82f6]">
+          <h1 className="text-6xl font-bold text-blue-400 drop-shadow-[0_0_25px_#3b82f6]">
             Hi, I'm
             <br/>
             Hardik Sondhi
@@ -41,7 +41,7 @@ function Home() {
             />
           </div>
 
-          <p className="text-gray-400 mt-6 max-w-md">
+          <p className="text-gray-600 mt-6 max-w-md">
             Building intelligent systems, full-stack applications, and
             scalable machine learning solutions.
           </p>
@@ -49,7 +49,7 @@ function Home() {
         </div>
 
         {/* LAPTOP */}
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 flex items-center justify-center z-30 pointer-events-none">
           <LaptopScene/>
         </div>
 
@@ -60,7 +60,7 @@ function Home() {
             Portfolio
           </h2>
 
-          <p className="text-gray-400">
+          <p className="text-gray-600">
             Scroll to explore my projects, certifications,
             and work in AI, robotics, and full-stack development.
           </p>

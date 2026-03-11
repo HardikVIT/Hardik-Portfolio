@@ -5,12 +5,13 @@ import Home from "./sections/Home";
 import Projects from "./sections/Projects";
 import Certifications from "./sections/Certifications";
 import Other from "./sections/Other";
+import ProjectLoading from "./components/ProjectLoading";
 
 function App() {
 
   return (
 
-    <div className="relative w-full min-h-screen overflow-x-hidden">
+    <div className="relative bg-white w-full min-h-screen overflow-x-hidden">
 
       {/* Neural Network Background */}
       <NeuralBackground />
@@ -25,7 +26,6 @@ function App() {
 
         {/* Hero section with laptop zoom */}
         <Home />
-
         {/* Full page projects (appears after zoom transition) */}
         <Projects />
 
