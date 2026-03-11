@@ -3,9 +3,8 @@ import NeuralBackground from "./components/NeuralBackground";
 
 import Home from "./sections/Home";
 import Projects from "./sections/Projects";
-import Certifications from "./sections/Certifications";
+import Achievements from "./sections/Achievements";
 import Other from "./sections/Other";
-import ProjectLoading from "./components/ProjectLoading";
 
 function App() {
 
@@ -27,10 +26,10 @@ function App() {
         {/* Hero section with laptop zoom */}
         <Home />
         {/* Full page projects (appears after zoom transition) */}
+        <Achievements />
         <Projects />
 
         {/* Other sections */}
-        <Certifications />
         <Other />
 
       </main>

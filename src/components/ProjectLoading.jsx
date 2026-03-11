@@ -29,7 +29,7 @@ function ProjectLoading() {
       <div className="text-center">
 
         <h2 className="text-neutral-300 text-2xl mb-12 tracking-wide">
-          Loading Projects
+          Loading Portfolio ---
         </h2>
 
         <div className="w-[420px] h-[6px] bg-neutral-800 rounded-full overflow-hidden">

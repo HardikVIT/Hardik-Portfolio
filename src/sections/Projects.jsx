@@ -32,22 +32,28 @@ function Projects() {
       link: "https://collab-space-pink.vercel.app/"
     },
     {
+      title: "Portfolio Webpage",
+      desc: "akdkd kanddkn .",
+      img: "/images/portfolio.png",
+      link: "https://hardik-portfolio-virid.vercel.app/"
+    },
+    {
+      title: "Shopify App",
+      desc: "New Age Saas project dealing with real life shopify stores for data analytics.",
+      img: "/images/shopify.png",
+      link: "https://github.com/yourusername/weather-app"
+    },
+    {
       title: "Gadget Lee",
       desc: "Tech ecommerce platform with ML product comparison and recommendation.",
       img: "/images/gadget.png",
-      link: "https://github.com/yourusername/gadgetlee"
+      link: "https://github.com/HardikVIT/Gadget-Lee"
     },
     {
       title: "Weather App",
       desc: "Modern weather dashboard with maps, APIs and location based data.",
       img: "/images/weather.png",
       link: "https://weather-app-frontend-lovat.vercel.app/"
-    },
-    {
-      title: "Shopify App",
-      desc: "New Age Saas project dealing with real life shopify stores for data analytics.",
-      img: "/images/weather.png",
-      link: "https://github.com/yourusername/weather-app"
     }
   ];
 
