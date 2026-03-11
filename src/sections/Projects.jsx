@@ -33,27 +33,15 @@ function Projects() {
     },
     {
       title: "Portfolio Webpage",
-      desc: "akdkd kanddkn .",
+      desc: "Developer portfolio featuring animated sections and interactive project displays.",
       img: "/images/portfolio.png",
       link: "https://hardik-portfolio-virid.vercel.app/"
     },
     {
       title: "Shopify App",
-      desc: "New Age Saas project dealing with real life shopify stores for data analytics.",
+      desc: "Next-gen SaaS tool delivering analytics and insights for Shopify stores.",
       img: "/images/shopify.png",
       link: "https://github.com/yourusername/weather-app"
-    },
-    {
-      title: "Gadget Lee",
-      desc: "Tech ecommerce platform with ML product comparison and recommendation.",
-      img: "/images/gadget.png",
-      link: "https://github.com/HardikVIT/Gadget-Lee"
-    },
-    {
-      title: "Weather App",
-      desc: "Modern weather dashboard with maps, APIs and location based data.",
-      img: "/images/weather.png",
-      link: "https://weather-app-frontend-lovat.vercel.app/"
     }
   ];
 
@@ -61,7 +49,7 @@ function Projects() {
     <Element
       name="projects"
       id="projects"
-      className="relative bg-black text-white min-h-[260vh] pt-40 pb-60"
+      className="relative bg-black text-white min-h-[260vh] pt-40 pb-5"
     >
 
       <div className="max-w-[1400px] mx-auto px-10">
@@ -223,8 +211,6 @@ function Projects() {
 
 
         {/* FEATURED PROJECT CARD */}
-
-        
 
       </div>
 

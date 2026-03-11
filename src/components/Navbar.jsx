@@ -10,9 +10,9 @@ function Navbar() {
 
   const navItems = [
     { id: "home", label: "Home" },
+    { id: "achievements", label: "Experience" },
     { id: "projects", label: "Projects" },
-    { id: "certifications", label: "Certifications" },
-    { id: "other", label: "Other" }
+    { id: "certificates", label: "Certificates" },
   ];
 
   useEffect(() => {

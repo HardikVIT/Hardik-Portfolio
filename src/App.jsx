@@ -4,7 +4,7 @@ import NeuralBackground from "./components/NeuralBackground";
 import Home from "./sections/Home";
 import Projects from "./sections/Projects";
 import Achievements from "./sections/Achievements";
-import Other from "./sections/Other";
+import Certificates from "./sections/Certificates";
 
 function App() {
 
@@ -30,7 +30,7 @@ function App() {
         <Projects />
 
         {/* Other sections */}
-        <Other />
+        <Certificates />
 
       </main>
 
