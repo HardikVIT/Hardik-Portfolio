@@ -7,35 +7,47 @@ function Projects() {
     {
       title: "Zero Shot Learning NIDS",
       desc: "AI intrusion detection system detecting unseen cyber attacks using zero-shot learning.",
-      img: "/images/nids.png"
+      img: "/images/zero_day.png",
+      link: "https://github.com/HardikVIT/Zero-Shot-Learning-NIDS-CNN-MLP-RNN"
     },
     {
       title: "Healthcare Prediction LLM",
       desc: "LLM powered healthcare prediction assisting in early diagnosis from patient data.",
-      img: "/images/healthcare.png"
+      img: "/images/healthcare.png",
+      link: "https://github.com/HardikVIT/HealthCare-Prediction-Langchain-LLM-"
     },
     {
       title: "Hand Gesture Mouse",
       desc: "Computer vision system controlling a mouse using hand gestures with OpenCV.",
-      img: "/images/Hand_Mouse.png"
+      img: "/images/Hand_Mouse.png",
+      link: "https://github.com/HardikVIT/Hand-Mouse"
     }
   ];
 
   const webProjects = [
     {
       title: "Collab Space",
-      desc: "Real-time collaborative workspace with chatrooms and shared whiteboards.", 
-      img: "/images/collab.png"
+      desc: "Real-time collaborative workspace with chatrooms and shared whiteboards.",
+      img: "/images/collab.png",
+      link: "https://collab-space-pink.vercel.app/"
     },
     {
       title: "Gadget Lee",
       desc: "Tech ecommerce platform with ML product comparison and recommendation.",
-      img: "/images/gadgetlee.png"
+      img: "/images/gadget.png",
+      link: "https://github.com/yourusername/gadgetlee"
     },
     {
       title: "Weather App",
       desc: "Modern weather dashboard with maps, APIs and location based data.",
-      img: "/images/weather.png"
+      img: "/images/weather.png",
+      link: "https://weather-app-frontend-lovat.vercel.app/"
+    },
+    {
+      title: "Shopify App",
+      desc: "New Age Saas project dealing with real life shopify stores for data analytics.",
+      img: "/images/weather.png",
+      link: "https://github.com/yourusername/weather-app"
     }
   ];
 
@@ -85,38 +97,42 @@ function Projects() {
 
           {aiProjects.map((project, i) => (
 
-            <motion.div
+            <a
               key={i}
-              whileHover={{ scale: 1.05, y: -12 }}
-              transition={{ type: "spring", stiffness: 150 }}
-              className="bg-neutral-900 border border-neutral-700 rounded-xl shadow-xl cursor-pointer overflow-hidden"
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
             >
 
-              {/* IMAGE */}
+              <motion.div
+                whileHover={{ scale: 1.05, y: -12 }}
+                transition={{ type: "spring", stiffness: 150 }}
+                className="bg-neutral-900 border border-neutral-700 rounded-xl shadow-xl cursor-pointer overflow-hidden hover:border-purple-500"
+              >
 
-              <div className="w-full h-[200px] bg-neutral-800">
-                <img
-                  src={project.img}
-                  alt={project.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+                <div className="w-full h-[200px] bg-neutral-800">
+                  <img
+                    src={project.img}
+                    alt={project.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
 
-              {/* TEXT */}
+                <div className="p-6">
 
-              <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-3">
+                    {project.title}
+                  </h3>
 
-                <h3 className="text-xl font-semibold mb-3">
-                  {project.title}
-                </h3>
+                  <p className="text-neutral-400 text-sm">
+                    {project.desc}
+                  </p>
 
-                <p className="text-neutral-400 text-sm">
-                  {project.desc}
-                </p>
+                </div>
 
-              </div>
+              </motion.div>
 
-            </motion.div>
+            </a>
 
           ))}
 
@@ -158,38 +174,42 @@ function Projects() {
 
           {webProjects.map((project, i) => (
 
-            <motion.div
+            <a
               key={i}
-              whileHover={{ scale: 1.05, y: -12 }}
-              transition={{ type: "spring", stiffness: 150 }}
-              className="bg-neutral-900 border border-neutral-700 rounded-xl shadow-xl cursor-pointer overflow-hidden"
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
             >
 
-              {/* IMAGE */}
+              <motion.div
+                whileHover={{ scale: 1.05, y: -12 }}
+                transition={{ type: "spring", stiffness: 150 }}
+                className="bg-neutral-900 border border-neutral-700 rounded-xl shadow-xl cursor-pointer overflow-hidden hover:border-purple-500"
+              >
 
-              <div className="w-full h-[200px] bg-neutral-800">
-                <img
-                  src={project.img}
-                  alt={project.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+                <div className="w-full h-[200px] bg-neutral-800">
+                  <img
+                    src={project.img}
+                    alt={project.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
 
-              {/* TEXT */}
+                <div className="p-6">
 
-              <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-3">
+                    {project.title}
+                  </h3>
 
-                <h3 className="text-xl font-semibold mb-3">
-                  {project.title}
-                </h3>
+                  <p className="text-neutral-400 text-sm">
+                    {project.desc}
+                  </p>
 
-                <p className="text-neutral-400 text-sm">
-                  {project.desc}
-                </p>
+                </div>
 
-              </div>
+              </motion.div>
 
-            </motion.div>
+            </a>
 
           ))}
 
@@ -198,40 +218,7 @@ function Projects() {
 
         {/* FEATURED PROJECT CARD */}
 
-        <div className="flex justify-center mt-16">
-
-          <motion.div
-            whileHover={{ scale: 1.05, y: -12 }}
-            transition={{ type: "spring", stiffness: 150 }}
-            className="bg-neutral-900 border border-neutral-700 rounded-xl shadow-xl cursor-pointer
-                       w-full md:w-[32%] h-[520px] overflow-hidden"
-          >
-
-            <div className="w-full h-[320px] bg-neutral-800">
-              <img
-                src="/images/featured.png"
-                alt="Featured project"
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            <div className="p-6">
-
-              <h3 className="text-xl font-semibold mb-3">
-                Featured Project
-              </h3>
-
-              <p className="text-neutral-400 text-sm">
-                This larger flashcard highlights a key project. You can place
-                a preview image above and redirect users to GitHub or a live
-                demo when clicked.
-              </p>
-
-            </div>
-
-          </motion.div>
-
-        </div>
+        
 
       </div>
 
