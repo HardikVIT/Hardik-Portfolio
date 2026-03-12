@@ -8,122 +8,104 @@ function Certificates() {
     {
       title: "AWS Cloud Practitioner",
       desc: "Certification validating foundational knowledge of AWS cloud services and architecture.",
-      img: "/images/aws.png",
-      link: "#"
+      img: "/images/aws.png"
     },
 
     {
       title: "Machine Learning Specialization",
       desc: "Comprehensive training covering supervised learning, neural networks and ML systems.",
-      img: "/images/ml.png",
-      link: "#"
+      img: "/images/ml.png"
     },
 
     {
       title: "Hackathon Finalist",
       desc: "Recognized finalist in a national level hackathon for building an AI driven solution.",
-      img: "/images/hackathon.png",
-      link: "#"
+      img: "/images/hackathon.png"
     },
 
     {
       title: "Data Structures & Algorithms",
       desc: "Certification demonstrating strong algorithmic and problem solving skills.",
-      img: "/images/dsa.png",
-      link: "#"
+      img: "/images/dsa.png"
     }
 
   ];
 
+  const duplicated = [...certificates, ...certificates];
 
   return (
 
     <Element
       name="certificates"
       id="certificates"
-      className="relative bg-black text-white min-h-screen pt-40 pb-40"
+      className="relative bg-black text-white min-h-screen pt-40 pb-40 overflow-hidden"
     >
 
       <div className="max-w-[1400px] mx-auto px-10">
 
 
-        {/* SECTION INTRO */}
+        {/* HEADING */}
 
-        <motion.div
-          initial={{ opacity: 0, x: -250 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.1 }}
-          viewport={{ once: true }}
-          className="max-w-4xl mb-24"
-        >
+        <div className="text-center mb-24">
 
-          <p className="text-sm tracking-widest text-neutral-400 mb-6">
+          <p className="text-sm tracking-widest text-neutral-400 mb-4">
             CERTIFICATIONS / ACHIEVEMENTS
           </p>
 
-          <h1 className="text-[4rem] md:text-[6rem] font-semibold leading-tight text-neutral-100 mb-10">
-            Continuous Learning. <br />
-            Verified Skills. <br />
-            Real Impact.
+          <h1 className="text-[3rem] md:text-[4.5rem] font-semibold leading-tight">
+            Proof of expertise from the
+            <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent ml-3">
+              verified learning
+            </span>
           </h1>
 
-          <p className="text-lg text-neutral-400 leading-relaxed max-w-3xl">
-            My certifications and achievements represent my dedication
-            to continuous learning and technical excellence. From cloud
-            computing to machine learning and competitive programming,
-            these milestones reflect my commitment to building impactful
-            and scalable systems.
-          </p>
-
-        </motion.div>
+        </div>
 
 
-        {/* CERTIFICATE CARDS */}
+        {/* SCROLLING CERTIFICATES */}
 
-        <div className="grid md:grid-cols-3 gap-12">
+        <div className="relative w-full overflow-hidden">
 
-          {certificates.map((cert, i) => (
+          <motion.div
+            className="flex gap-10"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{
+              duration: 30,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          >
 
-            <a
-              key={i}
-              href={cert.link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            {duplicated.map((cert, i) => (
 
-              <motion.div
-                whileHover={{ scale: 1.05, y: -12 }}
-                transition={{ type: "spring", stiffness: 150 }}
-                className="bg-neutral-900 border border-neutral-700 rounded-xl shadow-xl cursor-pointer overflow-hidden hover:border-blue-500"
+              <div
+                key={i}
+                className="min-w-[380px] bg-neutral-900 border border-neutral-700 rounded-2xl p-6 shadow-xl"
               >
 
-                <div className="w-full h-[200px] bg-neutral-800">
+                <div className="flex flex-col gap-6">
 
                   <img
                     src={cert.img}
                     alt={cert.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-[180px] object-cover rounded-lg"
                   />
 
-                </div>
-
-                <div className="p-6">
-
-                  <h3 className="text-xl font-semibold mb-3">
+                  <h3 className="text-xl font-semibold">
                     {cert.title}
                   </h3>
 
-                  <p className="text-neutral-400 text-sm">
+                  <p className="text-neutral-400 text-sm leading-relaxed">
                     {cert.desc}
                   </p>
 
                 </div>
 
-              </motion.div>
+              </div>
 
-            </a>
+            ))}
 
-          ))}
+          </motion.div>
 
         </div>
 
@@ -132,6 +114,7 @@ function Certificates() {
     </Element>
 
   );
+
 }
 
 export default Certificates;

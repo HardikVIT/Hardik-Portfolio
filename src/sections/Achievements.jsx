@@ -26,7 +26,7 @@ function Achievements() {
     <Element
       name="achievements"
       id="achievements"
-      className="relative bg-black text-white min-h-[220vh] pt-40 pb-20"
+      className="relative bg-black text-white min-h-[220vh] pt-40 pb-5"
     >
 
       <div className="max-w-[1400px] mx-auto px-10">
