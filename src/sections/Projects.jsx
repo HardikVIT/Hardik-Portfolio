@@ -299,6 +299,9 @@ function Projects() {
       <MovingRibbon />
 
       <div className="max-w-[1400px] mx-auto px-10">
+        <h1 className="text-[3.5rem] md:text-[5rem] font-semibold leading-tight text-neutral-100 mb-8">
+            PROJECTS <br />
+        </h1>
 
         <div className="mb-24">
 

@@ -30,7 +30,7 @@ function MovingRibbon() {
 
   return (
 
-    <div className="relative w-full h-[320px] overflow-hidden mt-32 mb-40">
+    <div className="relative w-full h-[320px] mt-32 mb-40">
 
       {/* TOP RIBBON */}
 
