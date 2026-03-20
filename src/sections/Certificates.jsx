@@ -1,51 +1,59 @@
 import { Element } from "react-scroll";
 import { motion } from "framer-motion";
+import { useRef } from "react";
 
 function Certificates() {
+
+  const scrollRef = useRef(null);
 
   const certificates = [
 
     {
-      title: "AWS Cloud Practitioner",
-      desc: "Certification validating foundational knowledge of AWS cloud services and architecture.",
-      img: "/images/aws.png"
+      title: "Google – Introduction to Large Language Models",
+      desc: "Fundamentals of LLMs including transformers, applications and real-world AI systems.",
+      img: "/images/Certificate/google-llm.png"
     },
 
     {
-      title: "Machine Learning Specialization",
-      desc: "Comprehensive training covering supervised learning, neural networks and ML systems.",
-      img: "/images/ml.png"
+      title: "Deloitte Data Analytics Job Simulation",
+      desc: "Hands-on experience in data analysis, dashboards and business insights.",
+      img: "/images/Certificate/deloitte-certificate.png"
     },
 
     {
-      title: "Hackathon Finalist",
-      desc: "Recognized finalist in a national level hackathon for building an AI driven solution.",
-      img: "/images/hackathon.png"
+      title: "AWS Educate – Introduction to Generative AI",
+      desc: "Core concepts of generative AI including foundation models and applications.",
+      img: "/images/Certificate/aws-gen-ai.png"
     },
 
     {
-      title: "Data Structures & Algorithms",
-      desc: "Certification demonstrating strong algorithmic and problem solving skills.",
-      img: "/images/dsa.png"
+      title: "AWS Academy Cloud Architecting",
+      desc: "Cloud architecture principles including scalability, security and AWS services.",
+      img: "/images/Certificate/aws-cloud-architecting.png"
     }
 
   ];
 
   const duplicated = [...certificates, ...certificates];
 
+  // 🔥 DRAG SCROLL FUNCTION
+  const handleWheel = (e) => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft += e.deltaY;
+    }
+  };
+
   return (
 
     <Element
       name="certificates"
       id="certificates"
-      className="relative bg-black text-white min-h-screen pt-40 pb-40 overflow-hidden"
+      className="relative bg-black text-white min-h-screen pt-40 pb-40"
     >
 
       <div className="max-w-[1400px] mx-auto px-10">
 
-
         {/* HEADING */}
-
         <div className="text-center mb-24">
 
           <p className="text-sm tracking-widest text-neutral-400 mb-4">
@@ -61,13 +69,16 @@ function Certificates() {
 
         </div>
 
-
-        {/* SCROLLING CERTIFICATES */}
-
-        <div className="relative w-full overflow-hidden">
+        {/* SCROLL CONTAINER */}
+        <div
+          ref={scrollRef}
+          onWheel={handleWheel}
+          className="overflow-x-auto scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-neutral-900 pb-6"
+          style={{ scrollBehavior: "smooth" }}
+        >
 
           <motion.div
-            className="flex gap-10"
+            className="flex gap-10 w-max"
             animate={{ x: ["0%", "-50%"] }}
             transition={{
               duration: 30,
@@ -80,7 +91,7 @@ function Certificates() {
 
               <div
                 key={i}
-                className="min-w-[380px] bg-neutral-900 border border-neutral-700 rounded-2xl p-6 shadow-xl"
+                className="min-w-[380px] bg-neutral-900 border border-neutral-700 rounded-2xl p-6 shadow-xl hover:scale-[1.03] transition"
               >
 
                 <div className="flex flex-col gap-6">
@@ -88,7 +99,7 @@ function Certificates() {
                   <img
                     src={cert.img}
                     alt={cert.title}
-                    className="w-full h-[180px] object-cover rounded-lg"
+                    className="w-full h-[240px] object-contain bg-white rounded-lg p-3 shadow-inner"
                   />
 
                   <h3 className="text-xl font-semibold">
@@ -108,6 +119,11 @@ function Certificates() {
           </motion.div>
 
         </div>
+
+        {/* SCROLL HINT */}
+        <p className="text-center text-xs text-neutral-500 mt-6 tracking-widest">
+          SCROLL → OR USE TRACKPAD
+        </p>
 
       </div>
 

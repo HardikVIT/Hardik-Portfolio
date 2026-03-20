@@ -1,346 +1,271 @@
 import { Element } from "react-scroll";
 import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+
 import {
+  SiReact,
+  SiJavascript,
+  SiTailwindcss,
+  SiNodedotjs,
   SiPython,
   SiTensorflow,
-  SiReact,
-  SiNodedotjs,
   SiMongodb,
   SiThreedotjs,
-  SiTailwindcss,
-  SiJavascript,
   SiChartdotjs,
   SiOpencv
 } from "react-icons/si";
+
 import { FaBrain, FaDatabase } from "react-icons/fa";
 import MovingRibbon from "../components/MovingRibbon";
 
 function Projects() {
+  const [active, setActive] = useState(0);
+  const rightRef = useRef(null);
 
   const aiProjects = [
     {
       title: "Zero Shot Learning NIDS",
-      headline:
-        "AI intrusion detection system capable of identifying unseen cyber attacks using zero-shot learning.",
-      desc: "AI intrusion detection system detecting unseen cyber attacks using zero-shot learning.",
-      img: "/images/zero_day.png",
+      desc: "A deep learning-based intrusion detection system designed to identify completely unseen cyber attacks using zero-shot learning. The system leverages hybrid architectures combining CNN, MLP, and RNN to generalize beyond trained attack patterns, making it highly effective for real-world cybersecurity scenarios where new threats emerge constantly.",
+      color: "from-purple-400 via-pink-500 to-indigo-500",
+      images: ["/images/zero_day.png"],
       github: "https://github.com/HardikVIT/Zero-Shot-Learning-NIDS-CNN-MLP-RNN",
       bullets: [
-        "Zero-shot learning for unseen attack detection",
+        "Zero-shot learning for unseen threats",
         "Hybrid CNN + MLP + RNN architecture",
-        "Improved detection accuracy",
-        "Designed for cybersecurity datasets"
+        "High generalization capability",
+        "Focused on real-world datasets",
       ],
-      skills: [
-        { icon: <SiPython />, name: "Python" },
-        { icon: <FaBrain />, name: "Machine Learning" },
-        { icon: <SiTensorflow />, name: "TensorFlow" },
-        { icon: <FaDatabase />, name: "Data Processing" }
-      ]
     },
-
     {
       title: "Healthcare Prediction LLM",
-      headline:
-        "LLM powered healthcare prediction system assisting early diagnosis from patient data.",
-      desc: "LLM powered healthcare prediction assisting early diagnosis from patient symptoms.",
-      img: "/images/healthcare.png",
-      github: "https://github.com/HardikVIT/HealthCare-Prediction-Langchain-LLM-",
+      desc: "An intelligent healthcare assistant powered by LLM pipelines that analyzes symptoms and predicts possible diseases. Built using modern AI workflows, it integrates language models with structured reasoning to assist early diagnosis and provide reliable health insights.",
+      color: "from-pink-300 via-fuchsia-400 to-red-400",
+      images: ["/images/healthcare.png"],
+      github: "#",
       bullets: [
-        "Large Language Model healthcare assistant",
-        "LangChain pipeline integration",
-        "Symptom analysis and early prediction",
-        "Accessible AI driven healthcare insights"
+        "LLM-based diagnosis system",
+        "LangChain integration",
+        "Symptom-to-disease prediction",
       ],
-      skills: [
-        { icon: <FaBrain />, name: "LLM" },
-        { icon: <SiPython />, name: "Python" },
-        { icon: <FaDatabase />, name: "AI Pipelines" }
-      ]
     },
-
     {
       title: "Hand Gesture Mouse",
-      headline:
-        "Computer vision system enabling full mouse control using real-time hand gestures.",
-      desc: "Computer vision system controlling mouse using OpenCV hand tracking.",
-      img: "/images/Hand_Mouse.png",
+      desc: "A real-time computer vision system that transforms hand gestures into mouse controls. Using Mediapipe and OpenCV, it enables touchless interaction with smooth cursor movement, clicking, and scrolling, providing an intuitive human-computer interface.",
+      color: "from-lime-300 via-emerald-400 to-green-500",
+      images: ["/images/Hand_Mouse.png"],
       github: "https://github.com/HardikVIT/Hand-Mouse",
       bullets: [
-        "Real-time gesture recognition",
-        "OpenCV + Mediapipe hand tracking",
-        "Finger gesture click and scroll detection",
-        "Smooth cursor movement"
+        "Real-time gesture tracking",
+        "Touchless interaction",
+        "Smooth cursor control",
       ],
-      skills: [
-        { icon: <SiOpencv />, name: "OpenCV" },
-        { icon: <SiPython />, name: "Python" },
-        { icon: <FaBrain />, name: "Computer Vision" }
-      ]
-    }
+    },
   ];
 
   const webProjects = [
     {
       title: "Collab Space",
-      headline:
-        "Real-time collaborative workspace with chatrooms and shared whiteboards.",
-      desc: "A collaborative productivity platform supporting real-time communication.",
-      img: "/images/collab.png",
+      desc: "A full-stack collaborative workspace enabling real-time communication and shared whiteboard interaction. Designed for teams and students, it supports multiple users simultaneously with seamless synchronization.",
+      color: "from-cyan-300 via-blue-500 to-violet-600",
+      images: ["/images/collab.png"],
       deploy: "https://collab-space-pink.vercel.app/",
       bullets: [
-        "Real-time chatrooms",
+        "Real-time chat system",
         "Collaborative whiteboard",
-        "Multi-user collaboration",
-        "Cloud based architecture"
+        "Multi-user sync",
       ],
-      skills: [
-        { icon: <SiReact />, name: "React" },
-        { icon: <SiMongodb />, name: "MongoDB" },
-        { icon: <SiNodedotjs />, name: "Node.js" }
-      ]
     },
-
     {
       title: "Portfolio Webpage",
-      headline:
-        "Interactive developer portfolio with smooth animations and 3D visuals.",
-      desc: "Personal portfolio showcasing projects and skills.",
-      img: "/images/portfolio.png",
+      desc: "A modern interactive developer portfolio featuring smooth animations, 3D visuals, and immersive UI/UX. Built with React, Tailwind, and Three.js to create a visually engaging experience.",
+      color: "from-yellow-200 via-orange-400 to-red-500",
+      images: ["/images/portfolio.png"],
       deploy: "https://hardik-portfolio-virid.vercel.app/",
       bullets: [
-        "Interactive project showcase",
         "Framer Motion animations",
-        "3D laptop scene using Three.js",
-        "Modern responsive UI"
+        "Three.js 3D integration",
+        "Highly responsive design",
       ],
-      skills: [
-        { icon: <SiReact />, name: "React" },
-        { icon: <SiThreedotjs />, name: "Three.js" },
-        { icon: <SiTailwindcss />, name: "Tailwind" },
-        { icon: <SiJavascript />, name: "JavaScript" }
-      ]
     },
-
     {
       title: "Shopify App",
-      headline:
-        "Next-generation SaaS analytics platform delivering insights for Shopify stores.",
-      desc: "Analytics dashboard providing insights for ecommerce stores.",
-      img: "/images/shopify.png",
-      github: "https://github.com/yourusername/weather-app",
+      desc: "A scalable SaaS analytics platform that provides deep insights into ecommerce store performance. It visualizes data using interactive charts and helps businesses make data-driven decisions.",
+      color: "from-cyan-200 via-sky-400 to-indigo-500",
+      images: ["/images/shopify.png"],
       bullets: [
-        "Ecommerce analytics dashboard",
-        "Store performance insights",
-        "Data visualization tools",
-        "Scalable SaaS architecture"
+        "Analytics dashboard",
+        "Chart.js visualizations",
+        "Business insights engine",
       ],
-      skills: [
-        { icon: <SiReact />, name: "React" },
-        { icon: <SiChartdotjs />, name: "Chart.js" },
-        { icon: <FaDatabase />, name: "Database" }
-      ]
-    }
+    },
   ];
 
-  const ProjectBlock = ({ project, reverse }) => (
+  const projects = [...aiProjects, ...webProjects];
 
-    <motion.div
-      initial={{ opacity: 0, y: 120 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      className={`grid md:grid-cols-[1.3fr_1fr] gap-20 items-center mb-40 ${
-        reverse ? "md:grid-cols-[1fr_1.3fr]" : ""
-      }`}
-    >
+  const handleRightScroll = () => {
+    const container = rightRef.current;
+    if (!container) return;
 
-      {!reverse && (
+    const progress =
+      container.scrollTop /
+      (container.scrollHeight - container.clientHeight);
 
-        <motion.div
-          animate={{ y: [0, -8, 0] }}
-          transition={{ duration: 4, repeat: Infinity }}
-          whileHover={{ scale: 1.03 }}
-          className="rounded-3xl p-10 min-h-[420px] bg-gradient-to-br from-blue-200 to-blue-400 shadow-[0_15px_40px_rgba(59,130,246,0.22)]"
-        >
+    const index = Math.min(
+      Math.floor(progress * projects.length),
+      projects.length - 1
+    );
 
-          <p className="text-blue-50 text-lg mb-6 flex justify-between">
-            {project.headline} <span>→</span>
-          </p>
+    setActive(index);
+  };
 
-          <div className="bg-black rounded-2xl p-3 h-[340px] overflow-hidden">
-
-            <img
-              src={project.img}
-              alt={project.title}
-              className="rounded-xl w-full h-full object-cover"
-            />
-
-          </div>
-
-        </motion.div>
-
-      )}
-
-      <div>
-
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-6 h-[3px] bg-blue-300"></div>
-          <span className="text-blue-300">Project</span>
-        </div>
-
-        <div className="flex items-center justify-between mb-4">
-
-          <h2 className="text-4xl font-semibold">
-            {project.title}
-          </h2>
-
-          <div className="flex gap-3">
-
-            {project.github && (
-              <motion.a
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                href={project.github}
-                target="_blank"
-                className="px-4 py-2 bg-blue-300 text-black rounded-lg font-medium"
-              >
-                GitHub
-              </motion.a>
-            )}
-
-            {project.deploy && (
-              <motion.a
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                href={project.deploy}
-                target="_blank"
-                className="px-4 py-2 bg-blue-200 text-black rounded-lg font-medium"
-              >
-                Deploy
-              </motion.a>
-            )}
-
-          </div>
-
-        </div>
-
-        <p className="text-neutral-400 mb-6">
-          {project.desc}
-        </p>
-
-        <ul className="space-y-3 mb-6">
-
-          {project.bullets.map((b, i) => (
-            <li key={i} className="flex gap-3">
-              <span className="text-blue-300">✦</span>
-              {b}
-            </li>
-          ))}
-
-        </ul>
-
-        <div className="flex flex-wrap gap-3">
-
-          {project.skills.map((s, i) => (
-
-            <span
-              key={i}
-              className="flex items-center gap-2 px-4 py-2 text-sm bg-neutral-900 border border-neutral-700 rounded-full"
-            >
-              {s.icon}
-              {s.name}
-            </span>
-
-          ))}
-
-        </div>
-
-      </div>
-
-      {reverse && (
-
-        <motion.div
-          animate={{ y: [0, -8, 0] }}
-          transition={{ duration: 4, repeat: Infinity }}
-          whileHover={{ scale: 1.03 }}
-          className="rounded-3xl p-10 min-h-[420px] bg-gradient-to-br from-blue-200 to-blue-400 shadow-[0_15px_40px_rgba(59,130,246,0.22)]"
-        >
-
-          <p className="text-blue-50 text-lg mb-6 flex justify-between">
-            {project.headline} <span>→</span>
-          </p>
-
-          <div className="bg-black rounded-2xl p-3 h-[340px] overflow-hidden">
-
-            <img
-              src={project.img}
-              alt={project.title}
-              className="rounded-xl w-full h-full object-cover"
-            />
-
-          </div>
-
-        </motion.div>
-
-      )}
-
-    </motion.div>
-
-  );
+  const project = projects[active];
 
   return (
-
-    <Element
-      name="projects"
-      id="projects"
-      className="bg-black text-white pt-40 pb-10"
-    >
-
+    <Element name="projects" id="projects" className="bg-black text-white">
       <MovingRibbon />
 
-      <div className="max-w-[1400px] mx-auto px-10">
-        <h1 className="text-[3.5rem] md:text-[5rem] font-semibold leading-tight text-neutral-100 mb-8">
-            PROJECTS <br />
-        </h1>
-
-        <div className="mb-24">
-
-          <p className="text-neutral-400 tracking-widest mb-4">
-            AI / MACHINE LEARNING
-          </p>
-
-          <h1 className="text-5xl font-semibold mb-6">
-            Intelligent AI Systems
-          </h1>
-
-        </div>
-
-        {aiProjects.map((p, i) => (
-          <ProjectBlock key={i} project={p} />
-        ))}
-
-        <div className="mb-24 mt-40 text-right">
-
-          <p className="text-neutral-400 tracking-widest mb-4">
-            WEB / FULL STACK
-          </p>
-
-          <h1 className="text-5xl font-semibold mb-6">
-            Modern Web Platforms
-          </h1>
-
-        </div>
-
-        {webProjects.map((p, i) => (
-          <ProjectBlock key={i} project={p} reverse />
-        ))}
-
+      <div className="max-w-[1500px] mx-auto px-12 ">
+        <h1 className="text-[5rem] font-semibold">PROJECTS</h1>
       </div>
 
+      <div className="flex relative" style={{ height: "100vh" }}>
+
+        {/* LEFT */}
+        <div className="w-[40%] relative flex items-center">
+
+          <div className="absolute right-0 top-0 h-full w-[1px] bg-neutral-800">
+
+            <motion.div
+              animate={{ y: [0, 300, 0] }}
+              transition={{ duration: 5, repeat: Infinity }}
+              className="absolute left-[-10px] text-blue-400 text-lg"
+            >
+              <SiPython />
+            </motion.div>
+
+            <motion.div
+              animate={{ y: ["0%", "100%"] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+              className="absolute left-[-70px] text-[10px] text-neutral-500 rotate-90 whitespace-nowrap tracking-widest"
+            >
+              AI • ML • WEB • PROJECTS • EXPLORE •
+            </motion.div>
+          </div>
+
+          <motion.div key={active} className="p-12">
+
+            <p className="text-xs text-neutral-500 mb-2 tracking-widest">
+              {active < aiProjects.length
+                ? "AI / MACHINE LEARNING"
+                : "WEB / FULL STACK"}
+            </p>
+
+            <p className="text-sm text-neutral-400 mb-3">
+              Project {active + 1} / {projects.length}
+            </p>
+
+            <h2 className="text-5xl font-bold mb-4">
+              {project.title}
+            </h2>
+
+            <p className="text-neutral-400 mb-6 leading-relaxed">
+              {project.desc}
+            </p>
+
+            <ul className="space-y-2 mb-6">
+              {project.bullets.map((b, i) => (
+                <li key={i}>✦ {b}</li>
+              ))}
+            </ul>
+
+            {/* 🔥 TEXT LINKS */}
+            <div className="flex gap-6 text-sm tracking-widest">
+
+              {project.github && (
+                <motion.a
+                  href={project.github}
+                  target="_blank"
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 1.2, repeat: Infinity }}
+                  className="mt-6 text-xs tracking-widest text-neutral-500"
+                >
+                  GITHUB ↗
+                </motion.a>
+              )}
+
+              {project.deploy && (
+                <motion.a
+                  href={project.deploy}
+                  target="_blank"
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 1.2, repeat: Infinity, delay: 0.3 }}
+                  className="text-neutral-400 hover:text-white cursor-pointer"
+                >
+                  LIVE ↗
+                </motion.a>
+              )}
+
+            </div>
+
+
+          </motion.div>
+        </div>
+
+        {/* RIGHT */}
+        <div
+          ref={rightRef}
+          onScroll={handleRightScroll}
+          className="w-[60%] overflow-y-auto p-20 relative no-scrollbar"
+        >
+          <div className="absolute right-0 top-0 h-full w-20 bg-gradient-to-l from-black to-transparent pointer-events-none" />
+
+          {projects.map((proj, i) => {
+            const isAIStart = i === 0;
+            const isWebStart = i === aiProjects.length;
+
+            return (
+              <div key={i} className="mb-40">
+
+                {isAIStart && (
+                  <h2 className="text-4xl font-semibold mb-20">
+                    AI Projects
+                  </h2>
+                )}
+
+                {isWebStart && (
+                  <h2 className="text-4xl font-semibold mb-20">
+                    Web Projects
+                  </h2>
+                )}
+
+                <motion.a
+                  href={proj.github || proj.deploy || "#"}
+                  target="_blank"
+                  whileHover={{ scale: 1.05, rotateX: 6, rotateY: 6 }}
+                  className="block"
+                >
+                  <div
+                    className={`p-6 h-[520px]  rounded-3xl bg-gradient-to-br ${proj.color} shadow-xl w-[90%]  mx-auto`}
+                  >
+                    <img
+                      src={proj.images[0]}
+                      className="rounded-xl w-full h-[400px] object-cover"
+                    />
+
+                    <h3 className="text-center mt-6 text-2xl font-semibold text-white tracking-tight font-[Space Grotesk]">
+                      {proj.title}
+                    </h3>
+                  </div>
+                </motion.a>
+
+              </div>
+            );
+          })}
+        </div>
+
+      </div>
     </Element>
-
   );
-
 }
 
 export default Projects;

@@ -6,13 +6,32 @@
 *::after {
   box-sizing: border-box;
 }
-
+/* index.css */
+::-webkit-scrollbar {
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #525252;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #171717;
+}
 html,
 body,
 #root {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
+}
+/* Hide scrollbar but keep scroll working */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE & Edge */
+  scrollbar-width: none;     /* Firefox */
 }
 
 /* Base Styling */
