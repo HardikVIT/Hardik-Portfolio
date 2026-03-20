@@ -7,6 +7,7 @@ function Navbar() {
   const [visible, setVisible] = useState(true);
 
   const lastScroll = useRef(0);
+  const hideTimer = useRef(null);
 
   const navItems = [
     { id: "home", label: "Home" },
@@ -15,39 +16,70 @@ function Navbar() {
     { id: "certificates", label: "Certificates" },
   ];
 
+  /* ── Scroll logic: hide on scroll down, show on scroll up ── */
   useEffect(() => {
 
     const handleScroll = () => {
-
       const currentScroll = window.scrollY;
 
-      // always show when near top
       if (currentScroll < 80) {
         setVisible(true);
-      }
-      // scrolling down
-      else if (currentScroll > lastScroll.current) {
+        clearTimeout(hideTimer.current);
+      } else if (currentScroll > lastScroll.current) {
+        // scrolling down — hide immediately
+        clearTimeout(hideTimer.current);
         setVisible(false);
-      }
-      // scrolling up
-      else {
+      } else {
+        // scrolling up — show briefly then hide
         setVisible(true);
+        clearTimeout(hideTimer.current);
+        hideTimer.current = setTimeout(() => setVisible(false), 2500);
       }
 
       lastScroll.current = currentScroll;
-
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(hideTimer.current);
+    };
 
   }, []);
+
+
+  /* ── Mouse proximity: show when within 60px of top edge ── */
+  useEffect(() => {
+
+    const handleMouseMove = (e) => {
+
+      // ignore if we're at the very top already (always visible anyway)
+      if (window.scrollY < 80) return;
+
+      if (e.clientY <= 60) {
+        // near top — show and cancel any pending hide
+        clearTimeout(hideTimer.current);
+        setVisible(true);
+      } else if (e.clientY > 120) {
+        // moved away — start hide timer (2.5s)
+        clearTimeout(hideTimer.current);
+        hideTimer.current = setTimeout(() => setVisible(false), 2500);
+      }
+
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+
+  }, []);
+
 
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-500
-      ${visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-6"}
+      ${visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-6 pointer-events-none"}
       `}
     >
 
@@ -73,6 +105,11 @@ function Navbar() {
                   smooth={true}
                   duration={600}
                   offset={-80}
+                  onClick={() => {
+                    if (item.id === "home") {
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                  }}
                   onSetActive={() => setActive(item.id)}
                   className={`transition duration-300 ${
                     active === item.id

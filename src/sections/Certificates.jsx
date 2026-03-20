@@ -1,10 +1,6 @@
 import { Element } from "react-scroll";
-import { motion } from "framer-motion";
-import { useRef } from "react";
 
 function Certificates() {
-
-  const scrollRef = useRef(null);
 
   const certificates = [
 
@@ -34,14 +30,8 @@ function Certificates() {
 
   ];
 
+  /* Duplicate once — CSS marquee scrolls exactly one set width then loops */
   const duplicated = [...certificates, ...certificates];
-
-  // 🔥 DRAG SCROLL FUNCTION
-  const handleWheel = (e) => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollLeft += e.deltaY;
-    }
-  };
 
   return (
 
@@ -50,6 +40,55 @@ function Certificates() {
       id="certificates"
       className="relative bg-black text-white min-h-screen pt-40 pb-40"
     >
+
+      {/* ── CSS keyframes injected inline ── */}
+      <style>{`
+        @keyframes marquee {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+
+        .marquee-track {
+          display: flex;
+          gap: 2rem;
+          width: max-content;
+          animation: marquee 30s linear infinite;
+        }
+
+        .marquee-track:hover {
+          animation-play-state: paused;
+        }
+
+        .cert-card {
+          min-width: 320px;
+          background: #171717;
+          border: 1px solid #404040;
+          border-radius: 1rem;
+          padding: 1.25rem;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+          transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+          transform-origin: center center;
+          position: relative;
+          z-index: 1;
+        }
+
+        .cert-card:hover {
+          transform: scale(1.06) translateY(-8px);
+          box-shadow: 0 30px 60px rgba(0,0,0,0.7);
+          border-color: #a855f7;
+          z-index: 50;
+        }
+
+        /* Wrapper needs overflow visible so zoomed cards aren't clipped */
+        .marquee-outer {
+          overflow: hidden;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          /* overflow-y visible so hover zoom shows above */
+          -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+        }
+      `}</style>
 
       <div className="max-w-[1400px] mx-auto px-10">
 
@@ -69,63 +108,64 @@ function Certificates() {
 
         </div>
 
-        {/* SCROLL CONTAINER */}
-        <div
-          ref={scrollRef}
-          onWheel={handleWheel}
-          className="overflow-x-auto scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-neutral-900 pb-6"
-          style={{ scrollBehavior: "smooth" }}
-        >
+      </div>
 
-          <motion.div
-            className="flex gap-10 w-max"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{
-              duration: 30,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          >
+      {/* MARQUEE — full width, outside the max-w container so edge fade works */}
+      <div className="marquee-outer w-full">
 
-            {duplicated.map((cert, i) => (
+        <div className="marquee-track">
 
-              <div
-                key={i}
-                className="min-w-[380px] bg-neutral-900 border border-neutral-700 rounded-2xl p-6 shadow-xl hover:scale-[1.03] transition"
-              >
+          {duplicated.map((cert, i) => (
 
-                <div className="flex flex-col gap-6">
+            <div key={i} className="cert-card">
 
+              <div className="flex flex-col gap-4">
+
+                {/* Image */}
+                <div
+                  style={{
+                    width: "100%",
+                    height: "170px",
+                    background: "#fff",
+                    borderRadius: "0.5rem",
+                    overflow: "hidden",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: "0.5rem",
+                  }}
+                >
                   <img
                     src={cert.img}
                     alt={cert.title}
-                    className="w-full h-[240px] object-contain bg-white rounded-lg p-3 shadow-inner"
+                    style={{ width: "100%", height: "100%", objectFit: "contain" }}
                   />
-
-                  <h3 className="text-xl font-semibold">
-                    {cert.title}
-                  </h3>
-
-                  <p className="text-neutral-400 text-sm leading-relaxed">
-                    {cert.desc}
-                  </p>
-
                 </div>
+
+                {/* Title */}
+                <h3 style={{ fontSize: "0.95rem", fontWeight: 600, lineHeight: 1.4, color: "#f5f5f5" }}>
+                  {cert.title}
+                </h3>
+
+                {/* Desc */}
+                <p style={{ fontSize: "0.75rem", color: "#a3a3a3", lineHeight: 1.6 }}>
+                  {cert.desc}
+                </p>
 
               </div>
 
-            ))}
+            </div>
 
-          </motion.div>
+          ))}
 
         </div>
 
-        {/* SCROLL HINT */}
-        <p className="text-center text-xs text-neutral-500 mt-6 tracking-widest">
-          SCROLL → OR USE TRACKPAD
-        </p>
-
       </div>
+
+      {/* SCROLL HINT */}
+      <p className="text-center text-xs text-neutral-500 mt-8 tracking-widest">
+        HOVER TO PAUSE
+      </p>
 
     </Element>
 

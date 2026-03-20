@@ -1,9 +1,12 @@
 import { Element } from "react-scroll";
+import {useEffect} from "react";
 import { TypeAnimation } from "react-type-animation";
 import LaptopScene from "../three/LaptopScene";
 
 function Home() {
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
 
     <Element
@@ -18,7 +21,7 @@ function Home() {
         {/* LEFT TEXT */}
         <div className="absolute left-20 top-[35%] max-w-lg z-20">
 
-          <h1 className="text-6xl font-bold text-blue-400 drop-shadow-[0_0_25px_#3b82f6]">
+          <h1 className="text-6xl font-bold text-blue-400 drop-shadow-[0_0_35px_#3b82f6]">
             Hi, I'm
             <br/>
             Hardik Sondhi

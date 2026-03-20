@@ -126,6 +126,13 @@ function Projects() {
 
       <div className="max-w-[1500px] mx-auto px-12 ">
         <h1 className="text-[5rem] font-semibold">PROJECTS</h1>
+          <motion.div
+            animate={{ y: ["0%", "100%"] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            className="absolute text-[10px] text-neutral-500 whitespace-nowrap tracking-widest"
+          >
+            AI • ML • WEB • PROJECTS • EXPLORE •
+          </motion.div>
       </div>
 
       <div className="flex relative" style={{ height: "100vh" }}>
@@ -143,14 +150,8 @@ function Projects() {
               <SiPython />
             </motion.div>
 
-            <motion.div
-              animate={{ y: ["0%", "100%"] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              className="absolute left-[-70px] text-[10px] text-neutral-500 rotate-90 whitespace-nowrap tracking-widest"
-            >
-              AI • ML • WEB • PROJECTS • EXPLORE •
-            </motion.div>
-          </div>
+
+          </div>  
 
           <motion.div key={active} className="p-12">
 
@@ -215,7 +216,7 @@ function Projects() {
         <div
           ref={rightRef}
           onScroll={handleRightScroll}
-          className="w-[60%] overflow-y-auto p-20 relative no-scrollbar"
+          className="w-[60%] overflow-y-auto relative no-scrollbar"
         >
           <div className="absolute right-0 top-0 h-full w-20 bg-gradient-to-l from-black to-transparent pointer-events-none" />
 
@@ -227,14 +228,14 @@ function Projects() {
               <div key={i} className="mb-40">
 
                 {isAIStart && (
-                  <h2 className="text-4xl font-semibold mb-20">
-                    AI Projects
+                  <h2 className="text-4xl pl-15 font-semibold mb-20">
+                    AI PROJECTS
                   </h2>
                 )}
 
                 {isWebStart && (
                   <h2 className="text-4xl font-semibold mb-20">
-                    Web Projects
+                    WEB PROJECTS
                   </h2>
                 )}
 
