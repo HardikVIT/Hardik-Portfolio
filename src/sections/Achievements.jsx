@@ -14,8 +14,6 @@ function Achievements() {
     }
   ];
 
-  /* LINKS FOR CERTIFICATES / PAPER */
-
   const links = {
     internshipCert: "#",
     researchPaper: "https://www.ijrti.org/viewpaperforall?paper=IJRTI2511012",
@@ -63,9 +61,6 @@ function Achievements() {
 
           </motion.div>
 
-
-          {/* INTERNSHIP CERTIFICATE IMAGE */}
-
           <motion.div
             initial={{ opacity: 0, x: 200 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -96,114 +91,87 @@ function Achievements() {
 
 
         {/* ===============================
-           PUBLICATION LINE
+           PUBLICATION SECTION (SPLIT)
         =============================== */}
 
-        <motion.div
-          initial={{ opacity: 0, x: -200 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          className="mb-20"
-        >
+        <div className="grid md:grid-cols-2 gap-16 items-start mb-40">
 
-          <p className="text-sm tracking-widest text-neutral-400 mb-6">
-            RESEARCH PUBLICATION
-          </p>
-
-          <h1 className="text-[3rem] md:text-[4.5rem] font-semibold leading-tight text-neutral-100 mb-6">
-            Research publication <br />
-            resulting from <br />
-            the internship.
-          </h1>
-
-        </motion.div>
-
-
-        {/* ===============================
-           PAPER TITLE
-        =============================== */}
-
-        <motion.div
-          initial={{ opacity: 0, y: 80 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          className="bg-neutral-900 border border-neutral-700 p-8 rounded-xl mb-24"
-        >
-
-          <h3 className="text-xl font-semibold mb-4">
-            AI-Based Disease Prediction and Guidance Using Symptoms and Language Models
-          </h3>
-
-          <p className="text-neutral-400 text-sm">
-            Published in International Journal for Research Trends and Innovation
-            (IJRTI), Volume 10 Issue 11 – Nov 2025.
-          </p>
-
-        </motion.div>
-
-
-        {/* ===============================
-           PAPER IMAGES
-        =============================== */}
-
-        <div className="grid md:grid-cols-2 gap-12 mb-40">
-
-          {/* PAPER IMAGE */}
+          {/* LEFT — Heading + certificate thumbnails */}
 
           <motion.div
-            initial={{ opacity: 0, x: -120 }}
+            initial={{ opacity: 0, x: -200 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
             viewport={{ once: true }}
-            className="flex flex-col items-center"
+            className="flex flex-col"
           >
 
-            <a
-              href={links.researchPaper}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="/images/research_paper.png"
-                alt="Research Paper"
-                className="w-full max-w-[520px] h-[360px] object-cover rounded-xl shadow-xl border border-neutral-700 hover:scale-105 transition duration-300 cursor-pointer"
-              />
-            </a>
-
-            <p className="text-neutral-400 text-sm mt-4">
-              Published research paper
+            <p className="text-sm tracking-widest text-neutral-400 mb-6">
+              RESEARCH PUBLICATION
             </p>
+
+            <h1 className="text-[2.5rem] md:text-[3.5rem] font-semibold leading-tight text-neutral-100 mb-10 pb-7">
+              Research publication <br />
+              resulting from <br />
+              the internship.
+            </h1>
+
+            <div className="flex flex-col gap-6">
+
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="flex flex-col items-start"
+              >
+                <a
+                  href={links.publisherCert}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="/images/publication_certificate.png"
+                    alt="Publisher Certificate"
+                    className="w-full max-w-[750px] h-[300px] object-cover rounded-xl shadow-xl border border-neutral-700 hover:scale-105 transition duration-300 cursor-pointer"
+                  />
+                <p className="text-neutral-400 text-center text-sm mt-3 ">
+                  Official E-Certificate
+                </p>
+                </a>
+              </motion.div>
+
+            </div>
 
           </motion.div>
 
 
-          {/* PUBLISHER CERTIFICATE */}
+          {/* RIGHT — Scrollable PDF Viewer from /images/research_paper.pdf */}
 
           <motion.div
-            initial={{ opacity: 0, x: 120 }}
+            initial={{ opacity: 0, x: 200 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
             viewport={{ once: true }}
-            className="flex flex-col items-center"
+            className="flex flex-col gap-4 sticky top-32"
           >
 
-            <a
-              href={links.publisherCert}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="/images/publication_certificate.png"
-                alt="Publisher Certificate"
-                className="w-full max-w-[520px] h-[360px] object-cover rounded-xl shadow-xl border border-neutral-700 hover:scale-105 transition duration-300 cursor-pointer"
-              />
-            </a>
-
-            <p className="text-neutral-400 text-sm mt-4">
-              Official E-Certificate
+            <p className="text-sm tracking-widest text-neutral-400">
+              FULL PAPER
             </p>
+
+            <p className="text-neutral-300 text-sm">
+              AI-Based Disease Prediction and Guidance Using Symptoms and Language Models
+            </p>
+
+            <div className="w-full h-[560px] rounded-2xl overflow-hidden border border-neutral-700 shadow-2xl">
+              <iframe
+                src="/images/Paper.pdf"
+                title="Research Paper"
+                className="w-full h-full"
+                style={{ background: "#111111" }}
+              />
+            </div>
 
           </motion.div>
 
@@ -219,7 +187,7 @@ function Achievements() {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
           viewport={{ once: true }}
-          className="max-w-4xl ml-auto text-right mb-20"
+          className="max-w-4xl text-left mb-20"
         >
 
           <p className="text-sm tracking-widest text-neutral-400 mb-6">
