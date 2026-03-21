@@ -1,0 +1,48 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  
+  <!-- DEFINITIONS (filters for softer shadows) -->
+  <defs>
+    <!-- Softer shadow for HS text -->
+    <filter id="textShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#777777" flood-opacity="0.35"/>
+    </filter>
+
+    <!-- Softer shadow for inner border -->
+    <filter id="borderShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="#666666" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="200" height="200" rx="30" ry="30" fill="black"/>
+
+  <!-- Inner Border -->
+  <rect 
+    x="8" 
+    y="8" 
+    width="184" 
+    height="184" 
+    rx="25" 
+    ry="25" 
+    fill="none" 
+    stroke="white" 
+    stroke-width="3"
+    opacity="0.95"
+    filter="url(#borderShadow)"
+  />
+
+  <!-- HS Text -->
+  <text 
+    x="50%" 
+    y="50%" 
+    text-anchor="middle" 
+    dominant-baseline="central" 
+    font-family="Arial, Helvetica, sans-serif" 
+    font-size="80" 
+    font-weight="bold" 
+    fill="white"
+    filter="url(#textShadow)">
+    HS
+  </text>
+
+</svg>
