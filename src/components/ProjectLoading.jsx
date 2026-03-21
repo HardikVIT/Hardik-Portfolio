@@ -1,53 +1,31 @@
-import { useEffect, useState } from "react";
-
-function ProjectLoading() {
-
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-
-    const handleScroll = () => {
-
-      const scrollTop = window.scrollY;
-      const maxScroll = 800;
-
-      const percentage = Math.min((scrollTop / maxScroll) * 100, 100);
-
-      setProgress(percentage);
-
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-
-  }, []);
-
+function ProjectLoading({ progress }) {
   return (
-    <section className="fixed inset-0 z-40 flex items-center justify-center bg-black pb-10">
-
-      <div className="text-center">
-
-        <h2 className="text-neutral-300 text-2xl mb-12 tracking-wide">
+    <div style={{
+      width: "500px",
+      height: "600px",
+      background: "black",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }}>
+      <div style={{ textAlign: "center" }}>
+        <h2 style={{ color: "#d4d4d4", fontSize: "24px", marginBottom: "48px", letterSpacing: "0.1em" }}>
           Loading Portfolio ---
         </h2>
-
-        <div className="w-[420px] h-[6px] bg-neutral-800 rounded-full overflow-hidden">
-
-          <div
-            className="h-full bg-blue-400 transition-all duration-200"
-            style={{ width: `${progress}%` }}
-          />
-
+        <div style={{ width: "420px", height: "6px", background: "#262626", borderRadius: "9999px", overflow: "hidden" }}>
+          <div style={{
+            height: "100%",
+            background: "#60a5fa",
+            borderRadius: "9999px",
+            width: `${progress}%`,
+            transition: "width 0.2s ease"
+          }} />
         </div>
-
-        <p className="text-neutral-400 mt-6 text-sm">
+        <p style={{ color: "#a3a3a3", marginTop: "24px", fontSize: "14px" }}>
           {Math.floor(progress)}%
         </p>
-
       </div>
-
-    </section>
+    </div>
   );
 }
 
