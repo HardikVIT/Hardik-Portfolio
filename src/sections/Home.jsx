@@ -21,7 +21,7 @@ function Home() {
         {/* LEFT TEXT */}
         <div className="absolute left-20 top-[35%] max-w-lg z-20">
 
-          <h1 className="text-6xl font-bold text-blue-400 drop-shadow-[0_0_35px_#3b82f6]">
+          <h1 className="text-xl font-bold text-blue-400 drop-shadow-[0_0_45px_#3b82f6]">
             Hi, I'm
             <br/>
             Hardik Sondhi
