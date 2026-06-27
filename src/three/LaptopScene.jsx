@@ -1,5 +1,5 @@
 import { Canvas, useThree } from "@react-three/fiber";
-import { useGLTF, Html, Preload, useProgress } from "@react-three/drei";
+import { useGLTF, Html, Preload } from "@react-three/drei";
 import { Suspense } from "react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import gsap from "gsap";
@@ -8,21 +8,19 @@ import ProjectLoading from "../components/ProjectLoading";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function LoadingCard({ progress }) {
-  const safeProgress = Math.max(8, Math.round(progress));
-
+function LoadingCard() {
   return (
     <div
       style={{
-        width: "280px",
-        padding: "22px 24px",
+        width: "230px",
+        padding: "18px 20px",
         borderRadius: "16px",
-        background: "rgba(0, 0, 0, 0.78)",
-        border: "1px solid rgba(96, 165, 250, 0.35)",
-        boxShadow: "0 0 40px rgba(96, 165, 250, 0.22)",
+        background: "rgba(0, 0, 0, 0.45)",
+        border: "1px solid rgba(96, 165, 250, 0.22)",
+        boxShadow: "0 0 28px rgba(96, 165, 250, 0.16)",
         color: "#d4d4d4",
         textAlign: "center",
-        backdropFilter: "blur(14px)",
+        backdropFilter: "blur(10px)",
         pointerEvents: "none",
       }}
     >
@@ -35,42 +33,42 @@ function LoadingCard({ progress }) {
           color: "#93c5fd",
         }}
       >
-        Loading 3D Model
+        Preparing 3D Scene
       </p>
       <div
         style={{
-          height: "6px",
-          width: "100%",
-          overflow: "hidden",
+          width: "34px",
+          height: "34px",
+          margin: "0 auto",
           borderRadius: "999px",
-          background: "#262626",
+          border: "2px solid rgba(147, 197, 253, 0.25)",
+          borderTopColor: "#93c5fd",
+          animation: "laptop-loader-spin 0.8s linear infinite",
         }}
-      >
-        <div
-          style={{
-            height: "100%",
-            width: `${safeProgress}%`,
-            borderRadius: "999px",
-            background: "#60a5fa",
-            transition: "width 0.2s ease",
-          }}
-        />
-      </div>
-      <p style={{ margin: "12px 0 0", fontSize: "12px", color: "#a3a3a3" }}>
-        {safeProgress}%
-      </p>
+      />
+      <style>
+        {`
+          @keyframes laptop-loader-spin {
+            to { transform: rotate(360deg); }
+          }
+        `}
+      </style>
     </div>
   );
 }
 
 function CanvasLoader() {
-  const { progress } = useProgress();
-
   return (
     <Html center zIndexRange={[100, 0]}>
-      <LoadingCard progress={progress} />
+      <LoadingCard />
     </Html>
   );
+}
+
+function ScenePreloader() {
+  useGLTF.preload("/models/laptop.glb");
+
+  return null;
 }
 
 function ScreenHtml({ progress }) {
@@ -164,7 +162,6 @@ function CameraMove() {
 export default function LaptopScene() {
   const [progress, setProgress] = useState(0);
   const [modelReady, setModelReady] = useState(false);
-  const { progress: assetProgress } = useProgress();
   const handleModelReady = useCallback(() => {
     setModelReady(true);
   }, []);
@@ -192,7 +189,7 @@ export default function LaptopScene() {
             justifyContent: "center",
           }}
         >
-          <LoadingCard progress={assetProgress} />
+          <LoadingCard />
         </div>
       )}
 
@@ -202,11 +199,12 @@ export default function LaptopScene() {
           width: "100%",
           height: "100%",
           opacity: modelReady ? 1 : 0,
-          transition: "opacity 0.35s ease",
+          transition: "opacity 0.25s ease",
         }}
         gl={{ alpha: true }}
         frameloop="always"
       >
+        <ScenePreloader />
         <ambientLight intensity={1.5} />
         <directionalLight position={[5, 5, 5]} intensity={2} />
         <Suspense fallback={<CanvasLoader />}>
