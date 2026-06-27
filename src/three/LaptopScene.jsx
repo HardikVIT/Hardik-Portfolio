@@ -1,11 +1,69 @@
 import { Canvas, useThree } from "@react-three/fiber";
-import { useGLTF, Html } from "@react-three/drei";
+import { useGLTF, Html, Preload, useProgress } from "@react-three/drei";
+import { Suspense } from "react";
 import { useEffect, useMemo, useState } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ProjectLoading from "../components/ProjectLoading";
 
 gsap.registerPlugin(ScrollTrigger);
+
+function CanvasLoader() {
+  const { progress } = useProgress();
+
+  return (
+    <Html center zIndexRange={[100, 0]}>
+      <div
+        style={{
+          width: "280px",
+          padding: "22px 24px",
+          borderRadius: "16px",
+          background: "rgba(0, 0, 0, 0.78)",
+          border: "1px solid rgba(96, 165, 250, 0.35)",
+          boxShadow: "0 0 40px rgba(96, 165, 250, 0.22)",
+          color: "#d4d4d4",
+          textAlign: "center",
+          backdropFilter: "blur(14px)",
+          pointerEvents: "none",
+        }}
+      >
+        <p
+          style={{
+            margin: "0 0 14px",
+            fontSize: "12px",
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            color: "#93c5fd",
+          }}
+        >
+          Loading 3D Model
+        </p>
+        <div
+          style={{
+            height: "6px",
+            width: "100%",
+            overflow: "hidden",
+            borderRadius: "999px",
+            background: "#262626",
+          }}
+        >
+          <div
+            style={{
+              height: "100%",
+              width: `${Math.round(progress)}%`,
+              borderRadius: "999px",
+              background: "#60a5fa",
+              transition: "width 0.2s ease",
+            }}
+          />
+        </div>
+        <p style={{ margin: "12px 0 0", fontSize: "12px", color: "#a3a3a3" }}>
+          {Math.round(progress)}%
+        </p>
+      </div>
+    </Html>
+  );
+}
 
 function ScreenHtml({ progress }) {
   const { size } = useThree();
@@ -113,8 +171,11 @@ export default function LaptopScene() {
     >
       <ambientLight intensity={1.5} />
       <directionalLight position={[5, 5, 5]} intensity={2} />
-      <CameraMove />
-      <LaptopModel progress={progress} />
+      <Suspense fallback={<CanvasLoader />}>
+        <CameraMove />
+        <LaptopModel progress={progress} />
+        <Preload all />
+      </Suspense>
     </Canvas>
   );
 }
