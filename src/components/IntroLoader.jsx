@@ -1,21 +1,25 @@
 import { useEffect, useMemo, useState } from "react";
 
-function IntroLoader({ duration = 500, onComplete }) {
+function IntroLoader({ duration = 1500, onComplete }) {
   const [progress, setProgress] = useState(0);
 
-  // Generate stars only once
+  // Static stars
   const stars = useMemo(
     () =>
-      Array.from({ length: 70 }, () => ({
-        top: `${Math.random() * 100}%`,
-        left: `${Math.random() * 100}%`,
-        duration: `${1 + Math.random() * 2}s`,
+      Array.from({ length: 250 }, () => ({
+        top: Math.random() * 100,
+        left: Math.random() * 100,
+        size: Math.random() * 1.5 + 0.5,
+        opacity: Math.random() * 0.5 + 0.3,
       })),
     []
   );
 
+
+
   useEffect(() => {
     let animationId;
+    let completed = false;
 
     const start = performance.now();
 
@@ -27,13 +31,19 @@ function IntroLoader({ duration = 500, onComplete }) {
 
       if (value < 100) {
         animationId = requestAnimationFrame(animate);
-      } else {
-        setProgress(100);
+        return;
+      }
 
-        // Small delay so user actually sees 100%
+      // FORCE FINAL STATE
+      setProgress(100);
+
+      if (!completed) {
+        completed = true;
+
+        // IMPORTANT: wait so UI actually shows 100%
         setTimeout(() => {
           onComplete?.();
-        }, 100);
+        }, 300); // 👈 increase delay (this fixes early switch)
       }
     };
 
@@ -43,29 +53,44 @@ function IntroLoader({ duration = 500, onComplete }) {
   }, [duration, onComplete]);
 
   return (
-    <div className="fixed inset-0 z-50 bg-black overflow-hidden flex items-center justify-center">
+    <div className="fixed inset-0 z-50 overflow-hidden bg-black flex items-center justify-center">
 
-      {/* Star Background */}
+      {/* =======================
+          STATIC STARS
+      ======================== */}
       <div className="absolute inset-0">
+
         {stars.map((star, i) => (
           <div
             key={i}
-            className="absolute w-[2px] h-[2px] rounded-full bg-white opacity-40 animate-pulse"
+            className="absolute rounded-full bg-white"
             style={{
-              top: star.top,
-              left: star.left,
-              animationDuration: star.duration,
+              top: `${star.top}%`,
+              left: `${star.left}%`,
+              width: `${star.size}px`,
+              height: `${star.size}px`,
+              opacity: star.opacity,
+              boxShadow: `
+                0 0 4px rgba(255,255,255,.9),
+                0 0 8px rgba(255,255,255,.4),
+                0 0 12px rgba(255,255,255,.15)
+              `,
             }}
           />
         ))}
+
       </div>
 
-      {/* Loader */}
+
+      {/* =======================
+            LOADER
+      ======================== */}
+
       <div className="relative z-10 text-center">
 
         <div className="w-16 h-16 border-2 border-white/20 border-t-white rounded-full animate-spin mx-auto" />
 
-        <p className="mt-4 text-sm tracking-[0.25em] text-white">
+        <p className="mt-5 text-sm tracking-[0.35em] text-white">
           INITIALIZING EXPERIENCE
         </p>
 
@@ -73,16 +98,19 @@ function IntroLoader({ duration = 500, onComplete }) {
           {Math.floor(progress)}%
         </p>
 
-        <div className="mt-4 mx-auto h-[2px] w-40 overflow-hidden bg-white/10 rounded-full">
+        <div className="mt-5 mx-auto h-[2px] w-44 overflow-hidden rounded-full bg-white/10">
+
           <div
-            className="h-full bg-white"
+            className="h-full bg-white transition-all"
             style={{
               width: `${progress}%`,
             }}
           />
+
         </div>
 
       </div>
+
     </div>
   );
 }

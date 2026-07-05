@@ -20,26 +20,6 @@ export default function Home() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-
-    // =========================
-    // CIRCLE PRELOADER (500ms)
-    // =========================
-    const start = Date.now();
-    const duration = 500;
-
-    const interval = setInterval(() => {
-      const elapsed = Date.now() - start;
-      const percent = Math.min((elapsed / duration) * 100, 100);
-
-      setLoader(percent);
-
-      if (percent >= 100) {
-        clearInterval(interval);
-        setReady(true); // 🔥 trigger everything together
-      }
-    }, 16);
-
-    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -104,100 +84,95 @@ export default function Home() {
         />
       )}
 
-      {/* Home Content */}
-      {ready && (
-        <>
-          {/* LEFT */}
-          <div className="absolute left-[6%] top-1/2 -translate-y-1/2 max-w-md z-20">
-            <p className="text-blue-500 text-xl font-semibold">
-              Hi, I'm
-            </p>
+        {/* LEFT */}
+        <div className="absolute left-[6%] top-1/2 -translate-y-1/2 max-w-md z-20">
+          <p className="text-blue-500 text-xl font-semibold">
+            Hi, I'm
+          </p>
 
-            <h1 className="mt-2 text-6xl font-bold leading-tight text-gray-800">
-              Hardik
-              <br />
-              Sondhi
-            </h1>
+          <h1 className="mt-2 text-6xl font-bold leading-tight text-gray-800">
+            Hardik
+            <br />
+            Sondhi
+          </h1>
 
-            <h2 className="mt-8 text-3xl font-medium text-blue-500">
-              Upcoming Specialist
-              <br />
-              @ Infosys
-            </h2>
+          <h2 className="mt-8 text-3xl font-medium text-blue-500">
+            Upcoming Specialist
+            <br />
+            @ Infosys
+          </h2>
 
-            <p className="mt-8 text-lg leading-8 text-gray-600">
-              Building intelligent systems, scalable AI products,
-              and modern full-stack applications that solve
-              real-world problems.
-            </p>
-          </div>
+          <p className="mt-8 text-lg leading-8 text-gray-600">
+            Building intelligent systems, scalable AI products,
+            and modern full-stack applications that solve
+            real-world problems.
+          </p>
+        </div>
 
-          {/* MODEL + SCREEN */}
+        {/* MODEL + SCREEN */}
+        <div
+          ref={laptopRef}
+          className="relative z-40 flex items-center justify-center"
+        >
+          <model-viewer
+            src="/models/laptop.glb"
+            loading="eager"
+            reveal="auto"
+            interaction-prompt="none"
+            camera-controls={false}
+            disable-pan
+            disable-zoom
+            exposure="1"
+            shadow-intensity="0"
+            camera-orbit="183deg 75deg 2.8m"
+            field-of-view="28deg"
+            tabIndex={-1}
+            style={{
+              width: "650px",
+              height: "650px",
+              background: "transparent",
+              outline: "none",
+              userSelect: "none",
+              pointerEvents: "none",
+            }}
+          />
+
           <div
-            ref={laptopRef}
-            className="relative z-40 flex items-center justify-center"
+            ref={screenRef}
+            className="absolute overflow-hidden"
+            style={{
+              top: "183px",
+              left: "198px",
+              width: "270px",
+              height: "254px",
+            }}
           >
-            <model-viewer
-              src="/models/laptop.glb"
-              loading="eager"
-              reveal="auto"
-              interaction-prompt="none"
-              camera-controls={false}
-              disable-pan
-              disable-zoom
-              exposure="1"
-              shadow-intensity="0"
-              camera-orbit="183deg 75deg 2.8m"
-              field-of-view="28deg"
-              tabIndex={-1}
-              style={{
-                width: "650px",
-                height: "650px",
-                background: "transparent",
-                outline: "none",
-                userSelect: "none",
-                pointerEvents: "none",
-              }}
-            />
-
-            <div
-              ref={screenRef}
-              className="absolute overflow-hidden"
-              style={{
-                top: "183px",
-                left: "198px",
-                width: "270px",
-                height: "254px",
-              }}
-            >
-              <ProjectLoading progress={progress} />
-            </div>
+            <ProjectLoading progress={progress} />
           </div>
+        </div>
 
-          {/* RIGHT */}
-          <div className="absolute right-[6%] top-1/2 -translate-y-1/2 max-w-md text-right z-20">
-            <h1 className="text-6xl font-light text-blue-500">
-              Portfolio
-            </h1>
+        {/* RIGHT */}
+        <div className="absolute right-[6%] top-1/2 -translate-y-1/2 max-w-md text-right z-20">
+          <h1 className="text-6xl font-light text-blue-500">
+            Portfolio
+          </h1>
 
-            <p className="mt-8 text-xl leading-9 text-gray-600">
-              Explore my projects, certifications,
-              and experience in Artificial Intelligence,
-              Robotics, Machine Learning,
-              and Full-Stack Development.
-            </p>
-          </div>
+          <p className="mt-8 text-xl leading-9 text-gray-600">
+            Explore my projects, certifications,
+            and experience in Artificial Intelligence,
+            Robotics, Machine Learning,
+            and Full-Stack Development.
+          </p>
+        </div>
 
-          {/* SCROLL */}
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center">
-            <span className="text-xs tracking-[0.35em] text-gray-500">
-              SCROLL
-            </span>
+        {/* SCROLL */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center">
+          <span className="text-xs tracking-[0.35em] text-gray-500">
+            SCROLL
+          </span>
 
-            <div className="mt-3 h-14 w-[2px] bg-gradient-to-b from-blue-500 to-transparent animate-pulse" />
-          </div>
-        </>
-      )}
+          <div className="mt-3 h-14 w-[2px] bg-gradient-to-b from-blue-500 to-transparent animate-pulse" />
+        </div>
     </Element>
   );
 }
