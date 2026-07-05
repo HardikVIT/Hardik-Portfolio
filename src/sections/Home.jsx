@@ -12,23 +12,38 @@ export default function Home() {
 
   const [progress, setProgress] = useState(0);
 
+  // 🔥 CHANGE SCREEN DELAY HERE (milliseconds)
+  const screenDelay = 150;
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hide the entire laptop initially
+      // Hide laptop initially
       gsap.set(laptopRef.current, {
         autoAlpha: 0,
       });
 
-      // Show laptop after 40ms (no fade)
-      const timer = setTimeout(() => {
+      // Hide screen initially
+      gsap.set(screenRef.current, {
+        autoAlpha: 0,
+      });
+
+      // Show laptop quickly
+      const laptopTimer = setTimeout(() => {
         gsap.set(laptopRef.current, {
           autoAlpha: 1,
         });
       }, 10);
+
+      // Show screen after delay
+      const screenTimer = setTimeout(() => {
+        gsap.set(screenRef.current, {
+          autoAlpha: 1,
+        });
+      }, screenDelay);
 
       // Laptop zoom animation
       gsap.to(laptopRef.current, {
@@ -61,11 +76,16 @@ export default function Home() {
         },
       });
 
-      return () => clearTimeout(timer);
+      // cleanup timers
+      return () => {
+        clearTimeout(laptopTimer);
+        clearTimeout(screenTimer);
+      };
     });
 
     return () => ctx.revert();
-  }, []);
+  }, [screenDelay]);
+
   return (
     <Element
       name="home"
@@ -74,9 +94,7 @@ export default function Home() {
     >
       {/* LEFT */}
       <div className="absolute left-[6%] top-1/2 -translate-y-1/2 max-w-md z-20">
-        <p className="text-blue-500 text-xl font-semibold">
-          Hi, I'm
-        </p>
+        <p className="text-blue-500 text-xl font-semibold">Hi, I'm</p>
 
         <h1 className="mt-2 text-6xl font-bold leading-tight text-gray-800">
           Hardik
@@ -92,8 +110,7 @@ export default function Home() {
 
         <p className="mt-8 text-lg leading-8 text-gray-600">
           Building intelligent systems, scalable AI products,
-          and modern full-stack applications that solve
-          real-world problems.
+          and modern full-stack applications that solve real-world problems.
         </p>
       </div>
 
