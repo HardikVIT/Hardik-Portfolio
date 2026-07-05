@@ -1,81 +1,167 @@
 import { Element } from "react-scroll";
-import {useEffect} from "react";
-import { TypeAnimation } from "react-type-animation";
-import LaptopScene from "../three/LaptopScene";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import ProjectLoading from "../components/ProjectLoading";
 
-function Home() {
+gsap.registerPlugin(ScrollTrigger);
+
+export default function Home() {
+  const laptopRef = useRef(null);
+  const screenRef = useRef(null);
+
+  const [progress, setProgress] = useState(0);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  return (
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Hide the entire laptop initially
+      gsap.set(laptopRef.current, {
+        autoAlpha: 0,
+      });
+
+      // Show laptop after 40ms (no fade)
+      const timer = setTimeout(() => {
+        gsap.set(laptopRef.current, {
+          autoAlpha: 1,
+        });
+      }, 40);
+
+      // Laptop zoom animation
+      gsap.to(laptopRef.current, {
+        scale: 6.2,
+        y: -120,
+        ease: "none",
+        transformOrigin: "center center",
+        scrollTrigger: {
+          trigger: "#home",
+          start: "top top",
+          end: "+=1200",
+          scrub: true,
+          pin: true,
+          onUpdate: (self) => {
+            setProgress(self.progress * 100);
+          },
+        },
+      });
+
+      // Screen zoom animation
+      gsap.to(screenRef.current, {
+        scale: 2.4,
+        ease: "none",
+        transformOrigin: "center center",
+        scrollTrigger: {
+          trigger: "#home",
+          start: "top top",
+          end: "+=2500",
+          scrub: true,
+        },
+      });
+
+      return () => clearTimeout(timer);
+    });
+
+    return () => ctx.revert();
+  }, []);
+  return (
     <Element
       name="home"
       id="home"
-      className="relative w-full "
+      className="relative h-[110vh] w-full overflow-hidden flex items-center justify-center"
     >
+      {/* LEFT */}
+      <div className="absolute left-[6%] top-1/2 -translate-y-1/2 max-w-md z-20">
+        <p className="text-blue-500 text-xl font-semibold">
+          Hi, I'm
+        </p>
 
-      {/* STICKY VIEWPORT */}
-      <div className="relative h-screen flex items-center justify-center">
+        <h1 className="mt-2 text-6xl font-bold leading-tight text-gray-800">
+          Hardik
+          <br />
+          Sondhi
+        </h1>
 
-        {/* LEFT TEXT */}
-        <div className="absolute left-20 top-[35%] max-w-lg z-20">
+        <h2 className="mt-8 text-3xl font-medium text-blue-500">
+          Upcoming Specialist
+          <br />
+          @ Infosys
+        </h2>
 
-          <h1 className="text-xl font-bold text-blue-400 drop-shadow-[0_0_45px_#3b82f6]">
-            Hi, I'm
-            <br/>
-            Hardik Sondhi
-          </h1>
-
-          <div className="mt-6 text-2xl text-blue-400">
-            <TypeAnimation
-              sequence={[
-                "AI Engineer",
-                1500,
-                "Software Developer",
-                1500,
-                "Machine Learning Enthusiast",
-                1500,
-                "Upcoming Specialist @ Infosys",
-                2000
-              ]}
-              speed={50}
-              repeat={Infinity}
-            />
-          </div>
-
-          <p className="text-gray-600 mt-6 max-w-md">
-            Building intelligent systems, full-stack applications, and
-            scalable machine learning solutions.
-          </p>
-
-        </div>
-
-        {/* LAPTOP */}
-        <div className="absolute inset-0 flex items-center justify-center z-30 pointer-events-none">
-          <LaptopScene/>
-        </div>
-
-        {/* RIGHT TEXT */}
-        <div className="absolute right-20 top-[40%] max-w-md text-right z-20">
-
-          <h2 className="text-4xl text-blue-400 mb-4">
-            Portfolio
-          </h2>
-
-          <p className="text-gray-600">
-            Scroll to explore my projects, certifications,
-            and work in AI, robotics, and full-stack development.
-          </p>
-
-        </div>
-
+        <p className="mt-8 text-lg leading-8 text-gray-600">
+          Building intelligent systems, scalable AI products,
+          and modern full-stack applications that solve
+          real-world problems.
+        </p>
       </div>
 
+      {/* MODEL + SCREEN */}
+      <div
+        ref={laptopRef}
+        className="relative z-40 flex items-center justify-center"
+      >
+        <model-viewer
+          src="/models/laptop.glb"
+          loading="eager"
+          reveal="auto"
+          interaction-prompt="none"
+          camera-controls={false}
+          disable-pan
+          disable-zoom
+          exposure="1"
+          shadow-intensity="0"
+          camera-orbit="183deg 75deg 2.8m"
+          field-of-view="28deg"
+          tabIndex={-1}
+          style={{
+            width: "650px",
+            height: "650px",
+            background: "transparent",
+            outline: "none",
+            userSelect: "none",
+            pointerEvents: "none",
+          }}
+        />
+
+        {/* Laptop Screen */}
+        <div
+          ref={screenRef}
+          className="absolute overflow-hidden"
+          style={{
+            top: "183px",
+            left: "198px",
+            width: "270px",
+            height: "254px",
+          }}
+        >
+          <ProjectLoading progress={progress} />
+        </div>
+      </div>
+
+      {/* RIGHT */}
+      <div className="absolute right-[6%] top-1/2 -translate-y-1/2 max-w-md text-right z-20">
+        <h1 className="text-6xl font-light text-blue-500">
+          Portfolio
+        </h1>
+
+        <p className="mt-8 text-xl leading-9 text-gray-600">
+          Explore my projects, certifications,
+          and experience in Artificial Intelligence,
+          Robotics, Machine Learning,
+          and Full-Stack Development.
+        </p>
+      </div>
+
+      {/* SCROLL */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center">
+        <span className="text-xs tracking-[0.35em] text-gray-500">
+          SCROLL
+        </span>
+
+        <div className="mt-3 h-14 w-[2px] bg-gradient-to-b from-blue-500 to-transparent animate-pulse" />
+      </div>
     </Element>
-
   );
-
 }
-
-export default Home;

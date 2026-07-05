@@ -102,12 +102,23 @@ function Navbar() {
 
                 <Link
                   to={item.id}
-                  smooth={true}
+                  smooth={item.id !== "home"}
                   duration={600}
-                  offset={-80}
-                  onClick={() => {
+                  offset={item.id === "home" ? 0 : -80}
+                  onClick={(e) => {
                     if (item.id === "home") {
-                      window.scrollTo({ top: 0, behavior: "smooth" });
+                      e.preventDefault();
+
+                      if (window.lenis) {
+                        window.lenis.scrollTo(0, {
+                          duration: 1.2,
+                        });
+                      } else {
+                        window.scrollTo({
+                          top: 0,
+                          behavior: "smooth",
+                        });
+                      }
                     }
                   }}
                   onSetActive={() => setActive(item.id)}

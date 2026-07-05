@@ -99,7 +99,7 @@ function Projects() {
       ],
     },
   ];
-
+  
   const projects = [...aiProjects, ...webProjects];
 
   const handleRightScroll = () => {
@@ -116,6 +116,23 @@ function Projects() {
     );
 
     setActive(index);
+  };
+  const handleWheel = (e) => {
+    const el = rightRef.current;
+    if (!el) return;
+
+    const atTop = el.scrollTop === 0;
+    const atBottom =
+      el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
+
+    // If NOT at edges → lock to inner scroll
+    if (!atTop && !atBottom) {
+      e.stopPropagation();
+      return;
+    }
+
+    // If at edges → allow Lenis (global scroll)
+    window.lenis?.start();
   };
 
   const project = projects[active];
@@ -216,7 +233,8 @@ function Projects() {
         <div
           ref={rightRef}
           onScroll={handleRightScroll}
-          className="w-[60%] overflow-y-auto relative no-scrollbar"
+          onWheel={handleWheel}
+          className="projects-scroll w-[60%] overflow-y-auto relative no-scrollbar"
         >
           <div className="absolute right-0 top-0 h-full w-20 bg-gradient-to-l from-black to-transparent pointer-events-none" />
 

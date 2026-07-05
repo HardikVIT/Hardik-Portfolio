@@ -17,6 +17,18 @@
 ::-webkit-scrollbar-track {
   background: #171717;
 }
+model-viewer {
+  outline: none;
+  border: none;
+  background: transparent;
+  user-select: none;
+}
+
+model-viewer:focus,
+model-viewer:focus-visible {
+  outline: none !important;
+  border: none !important;
+}
 html,
 body,
 #root {
