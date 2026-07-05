@@ -28,7 +28,7 @@ export default function Home() {
         gsap.set(laptopRef.current, {
           autoAlpha: 1,
         });
-      }, 40);
+      }, 10);
 
       // Laptop zoom animation
       gsap.to(laptopRef.current, {
